@@ -12,9 +12,9 @@ import (
 	"time"
 
 	msgraphsdkgo "github.com/microsoftgraph/msgraph-sdk-go"
-	"github.com/purpose-robot/azure-graph-api/internal/azure"
-	"github.com/purpose-robot/azure-graph-api/internal/config"
-	"github.com/purpose-robot/azure-graph-api/internal/meraki"
+	"github.com/purpose-robot/meraki-entra-sync/internal/azure"
+	"github.com/purpose-robot/meraki-entra-sync/internal/config"
+	"github.com/purpose-robot/meraki-entra-sync/internal/meraki"
 )
 
 func main() {

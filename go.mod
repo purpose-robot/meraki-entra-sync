@@ -1,4 +1,4 @@
-module github.com/purpose-robot/azure-graph-api
+module github.com/purpose-robot/meraki-entra-sync
 
 go 1.26.5
 

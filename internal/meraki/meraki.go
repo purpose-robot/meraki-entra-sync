@@ -9,7 +9,7 @@ import (
 	"net/netip"
 	"net/url"
 
-	"github.com/purpose-robot/azure-graph-api/internal/config"
+	"github.com/purpose-robot/meraki-entra-sync/internal/config"
 )
 
 const baseURL = "https://api.meraki.com/api/v1"

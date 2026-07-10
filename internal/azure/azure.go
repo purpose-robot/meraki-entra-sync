@@ -13,7 +13,7 @@ import (
 	msgraphsdkgo "github.com/microsoftgraph/msgraph-sdk-go"
 	msgraphsdkgocore "github.com/microsoftgraph/msgraph-sdk-go-core"
 	"github.com/microsoftgraph/msgraph-sdk-go/models"
-	"github.com/purpose-robot/azure-graph-api/internal/config"
+	"github.com/purpose-robot/meraki-entra-sync/internal/config"
 )
 
 type CIDRSet map[string]struct{}
