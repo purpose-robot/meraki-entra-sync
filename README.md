@@ -1,6 +1,6 @@
 # meraki-entra-sync
 
-This script keeps Microsoft Entra Conditional Access [named locations](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-assignment-network) entries in sync with the public IP addresses of Cisco Meraki networks.
+This script keeps Microsoft Entra Conditional Access [named locations](https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-assignment-network) in sync with the public IP addresses of Cisco Meraki networks.
 
 Every minute, the script fetches all Meraki networks carrying one of the configured tags, reads the public IP addresses (IPv4 and IPv6) of their activate appliance uplinks, and reconciles them against the tenant's named locations, matching by display name:
 
