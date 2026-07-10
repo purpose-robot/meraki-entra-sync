@@ -51,7 +51,7 @@ func (c CIDRSet) toIPRanges() []models.IpRangeable {
 	return ipRanges
 }
 
-func KeepNetworkInSync(ctx context.Context, client *msgraphsdkgo.GraphServiceClient, networkID, networkName string, desired CIDRSet, locations map[string]NamedLocation) error {
+func KeepNetworksInSync(ctx context.Context, client *msgraphsdkgo.GraphServiceClient, networkID, networkName string, desired CIDRSet, locations map[string]NamedLocation) error {
 	if len(desired) == 0 {
 		log.Printf("network %s (%q): No public IPs reported; skip", networkID, networkName)
 		return nil

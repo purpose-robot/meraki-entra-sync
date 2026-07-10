@@ -117,7 +117,7 @@ func runTicker(ctx context.Context, config config.Config, graphClient *msgraphsd
 			continue
 		}
 
-		err := azure.KeepNetworkInSync(ctx, graphClient, networkID, networkName, desired, locations)
+		err := azure.KeepNetworksInSync(ctx, graphClient, networkID, networkName, desired, locations)
 		if err != nil {
 			errs = append(errs, fmt.Errorf("failed to synchronize Meraki network %s with Azure: %w", networkID, err))
 		}
