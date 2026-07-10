@@ -177,6 +177,7 @@ func GetCANamedLocations(ctx context.Context, client *msgraphsdkgo.GraphServiceC
 
 func updateCANamedLocations(ctx context.Context, client *msgraphsdkgo.GraphServiceClient, locationID string, cidrs CIDRSet) error {
 	body := models.NewIpNamedLocation()
+	body.SetIsTrusted(new(true))
 	body.SetIpRanges(cidrs.toIPRanges())
 
 	_, err := client.Identity().ConditionalAccess().NamedLocations().ByNamedLocationId(locationID).Patch(ctx, body, nil)
@@ -191,6 +192,7 @@ func createCANamedLocations(ctx context.Context, client *msgraphsdkgo.GraphServi
 	body := models.NewIpNamedLocation()
 
 	body.SetDisplayName(&name)
+	body.SetIsTrusted(new(true))
 	body.SetIpRanges(cidrs.toIPRanges())
 
 	created, err := client.Identity().ConditionalAccess().NamedLocations().Post(ctx, body, nil)
