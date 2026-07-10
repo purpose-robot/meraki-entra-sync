@@ -12,7 +12,7 @@ The tool is stateless: Entra is the single source of truth, and each run is a fr
 
 ## Configuration
 
-All configuration must be defined as environment variables (see `.env.sample`):
+All configuration must be defined as environment variables (see `.env.sample` as an example):
 
 | Variable | Description |
 | --- | --- |
