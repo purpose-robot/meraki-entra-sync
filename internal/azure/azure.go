@@ -51,36 +51,36 @@ func (c CIDRSet) toIPRanges() []models.IpRangeable {
 	return ipRanges
 }
 
-func KeepNetworkInSync(ctx context.Context, client *msgraphsdkgo.GraphServiceClient, networkID, networkName string, desiredCIDRs CIDRSet, locations map[string]NamedLocation) error {
-	if len(desiredCIDRs) == 0 {
+func KeepNetworkInSync(ctx context.Context, client *msgraphsdkgo.GraphServiceClient, networkID, networkName string, desired CIDRSet, locations map[string]NamedLocation) error {
+	if len(desired) == 0 {
 		log.Printf("network %s (%q): No public IPs reported; skip", networkID, networkName)
 		return nil
 	}
 
 	existing, ok := locations[networkName]
 	if !ok {
-		locationID, err := createCANamedLocations(ctx, client, networkName, desiredCIDRs)
+		locationID, err := createCANamedLocations(ctx, client, networkName, desired)
 		if err != nil {
 			return err
 		}
 
-		locations[networkName] = NamedLocation{ID: locationID, IPRanges: desiredCIDRs}
+		locations[networkName] = NamedLocation{ID: locationID, IPRanges: desired}
 
-		log.Printf("network %s (%q): Named location %s with IP set %v created", networkID, networkName, locationID, desiredCIDRs.Sorted())
+		log.Printf("network %s (%q): Named location %s with IP set %v created", networkID, networkName, locationID, desired.Sorted())
 		return nil
 	}
 
-	if maps.Equal(existing.IPRanges, desiredCIDRs) {
+	if maps.Equal(existing.IPRanges, desired) {
 		return nil
 	}
 
-	log.Printf("network %s (%q): Public IPs changed from %v to %v", networkID, networkName, existing.IPRanges.Sorted(), desiredCIDRs.Sorted())
+	log.Printf("network %s (%q): Public IPs changed from %v to %v", networkID, networkName, existing.IPRanges.Sorted(), desired.Sorted())
 
-	if err := updateCANamedLocations(ctx, client, existing.ID, desiredCIDRs); err != nil {
+	if err := updateCANamedLocations(ctx, client, existing.ID, desired); err != nil {
 		return err
 	}
 
-	existing.IPRanges = desiredCIDRs
+	existing.IPRanges = desired
 	locations[networkName] = existing
 
 	log.Printf("network %s (%q): Named location %s successfully updated in Azure", networkID, networkName, existing.ID)

@@ -50,13 +50,13 @@ func main() {
 }
 
 func buildDesiredIPSet(statuses meraki.ApplianceUplinkStatuses) map[string]azure.CIDRSet {
-	desiredCIDRs := make(map[string]azure.CIDRSet)
+	desired := make(map[string]azure.CIDRSet)
 
 	for _, appliance := range statuses {
-		ipSet := desiredCIDRs[appliance.NetworkID]
+		ipSet := desired[appliance.NetworkID]
 		if ipSet == nil {
 			ipSet = make(azure.CIDRSet)
-			desiredCIDRs[appliance.NetworkID] = ipSet
+			desired[appliance.NetworkID] = ipSet
 		}
 
 		for _, uplink := range appliance.Uplinks {
@@ -73,7 +73,7 @@ func buildDesiredIPSet(statuses meraki.ApplianceUplinkStatuses) map[string]azure
 		}
 	}
 
-	return desiredCIDRs
+	return desired
 }
 
 func runTicker(ctx context.Context, config config.Config, graphClient *msgraphsdkgo.GraphServiceClient) error {
@@ -110,14 +110,14 @@ func runTicker(ctx context.Context, config config.Config, graphClient *msgraphsd
 
 	var errs []error
 
-	for networkID, desiredCIDRs := range buildDesiredIPSet(statuses) {
+	for networkID, desired := range buildDesiredIPSet(statuses) {
 		networkName, ok := nameByNetworkID[networkID]
 		if !ok || networkName == "" {
 			errs = append(errs, fmt.Errorf("network %s: no network name known; skipping", networkID))
 			continue
 		}
 
-		err := azure.KeepNetworkInSync(ctx, graphClient, networkID, networkName, desiredCIDRs, locations)
+		err := azure.KeepNetworkInSync(ctx, graphClient, networkID, networkName, desired, locations)
 		if err != nil {
 			errs = append(errs, fmt.Errorf("failed to synchronize Meraki network %s with Azure: %w", networkID, err))
 		}
