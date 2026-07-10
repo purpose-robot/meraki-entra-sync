@@ -18,7 +18,7 @@ All configuration must be defined as environment variables (see `.env.sample`):
 | --- | --- |
 | `AZURE_TENANT_ID` | Entra tenant ID |
 | `AZURE_CLIENT_ID` | App registration used for Microsoft Graph (needs `Policy.Read.All` and `Policy.ReadWrite.ConditionalAccess`) |
-| `AZURE_CLIENT_SECRET` | Client secret for the app registration |
+| `AZURE_CLIENT_SECRET` | Client secret for the app registration process |
 | `MERAKI_CLIENT_SECRET` | Meraki Dashboard API key (read access is sufficient) |
 | `MERAKI_ORGANIZATION_ID` | Meraki organization to scan |
 | `MERAKI_ALLOWED_NETWORK_TAGS` | Comma-separated list of network tags; only matching networks are synced |
