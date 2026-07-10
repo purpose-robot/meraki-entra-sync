@@ -22,5 +22,3 @@ All configuration must be defined as environment variables (see `.env.sample`):
 | `MERAKI_CLIENT_SECRET` | Meraki Dashboard API key (read access is sufficient) |
 | `MERAKI_ORGANIZATION_ID` | Meraki organization to scan |
 | `MERAKI_ALLOWED_NETWORK_TAGS` | Comma-separated list of network tags; only matching networks are synced |
-
-> **Note:** synced locations are created as *trusted*, so any Conditional Access policy scoped to "all trusted locations" applies to these IPs immediately. Tag networks deliberately, and note that Meraki matches tags by substring (`office` also matches `office-guest`).
