@@ -8,7 +8,7 @@ Every minute, the script fetches all Meraki networks carrying one of the configu
 - **No named location with the network name exists** → new entry is created with the uplink IPs, marked as *trusted*
 - **The location already exists but its IP ranges differ** → the ranges are updated. The trusted flag is deliberately left untouched, so unchecking *"Mark as trusted location"* in the Entra portal sticks
 
-The tool is stateless: Entra is the single source of truth, and each run is a fresh comparison, so manual deletions or IP changes self-heal on the next tick. Conditional Access *policies* are never touched - locations created here take effect through whatever policies already reference trusted locations.
+The tool is stateless: Entra is the single source of truth, and each run is a fresh comparison, so manual deletions or IP changes self-heal on the next tick. Conditional Access *policies* are never touched — locations created here take effect through whatever policies already reference trusted locations.
 
 ## Configuration
 
