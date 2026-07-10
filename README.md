@@ -5,8 +5,8 @@ This script keeps Microsoft Entra Conditional Access [named locations](https://l
 Every minute, the script fetches all Meraki networks carrying one of the configured tags, reads the public IP addresses (IPv4 and IPv6) of their activate appliance uplinks, and reconciles them against the tenant's named locations, matching by display name:
 
 - **The location already matches** → nothing happens.
-- **No named location with the network name exists** -> new entry is created with the uplink IPs, marked as *trusted*
-- **The location already exists but its IP ranges differ** -> the ranges are updated. The trusted flag is deliberately left untouched, so unchecking *"Mark as trusted location"* in the Entra portal sticks
+- **No named location with the network name exists** → new entry is created with the uplink IPs, marked as *trusted*
+- **The location already exists but its IP ranges differ** → the ranges are updated. The trusted flag is deliberately left untouched, so unchecking *"Mark as trusted location"* in the Entra portal sticks
 
 The tool is stateless: Entra is the single source of truth, and each run is a fresh comparison, so manual deletions or IP changes self-heal on the next tick. Conditional Access *policies* are never touched — locations created here take effect through whatever policies already reference trusted locations.
 
